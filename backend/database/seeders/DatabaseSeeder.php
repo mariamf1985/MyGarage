@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ClienteSeeder::class,
         ServicioSeeder::class,
         CocheSeeder::class,
-        citaSeeder::class,
+        CitaSeeder::class,
 
     ]);
     }

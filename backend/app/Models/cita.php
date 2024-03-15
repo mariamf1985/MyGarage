@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cita extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_car', 'id_service', 'date', 'description'];
+    protected $guarded = [];
+
 
     /**
      * Define la relación entre Cita y Coche.

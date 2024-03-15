@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Coche extends Model
 {
     use HasFactory;
-    protected $fillable = ['brand', 'model', 'registration_plate', 'id_client'];
+    protected $guarded = [];
+
 
     /**
      * Define la relación entre Coche y Cliente.

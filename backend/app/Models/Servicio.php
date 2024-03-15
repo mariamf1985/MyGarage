@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description'];
+    protected $guarded = [];
+
 
     /**
      * Define la relación muchos a muchos entre Servicio y Cita.
