@@ -17,7 +17,10 @@ class CocheFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'brand' => $this->faker->word(),
+            'model' => $this->faker->word(),
+            'registration_plate' => $this->faker->bothify('??###??'),
+            
         ];
     }
 }
