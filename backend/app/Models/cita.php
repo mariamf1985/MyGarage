@@ -5,7 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class cita extends Model
+class Cita extends Model
 {
     use HasFactory;
+    protected $fillable = ['id_car', 'id_service', 'date', 'description'];
+
+    /**
+     * Define la relación entre Cita y Coche.
+     */
+    public function coche()
+    {
+        return $this->belongsTo(Coche::class, 'id_car');
+    }
+
+    /**
+     * Define la relación muchos a muchos entre Cita y Servicio.
+     */
+    public function servicios()
+    {
+        return $this->belongsToMany(Servicio::class);
+    }
 }
