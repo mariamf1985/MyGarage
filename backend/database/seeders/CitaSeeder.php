@@ -12,6 +12,6 @@ class CitaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Cita::factory(10)->create();
     }
 }

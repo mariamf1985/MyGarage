@@ -12,6 +12,6 @@ class CocheSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Coche::factory(10)->create();
     }
 }
