@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Coche;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use GuzzleHttp\Client;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\coche>
- */
 class CocheFactory extends Factory
 {
     /**
@@ -16,11 +15,25 @@ class CocheFactory extends Factory
      */
     public function definition(): array
     {
+        $client = new Client();
+        $response = $client->get('https://www.carqueryapi.com/api/0.3/?cmd=getMakesAndModels');
+        $data = json_decode($response->getBody(), true);
+        
+        $makesWithModels = collect($data['Makes'])->flatMap(function ($make) {
+            return collect($make['models'])->map(function ($model) use ($make) {
+                return [
+                    'make' => $make['make_display'],
+                    'model' => $model['model_name'],
+                ];
+            });
+        });
+    
+        $car = $makesWithModels->random();
+    
         return [
-            'brand' => $this->faker->word(),
-            'model' => $this->faker->word(),
+            'brand' => $car['make'],
+            'model' => $car['model'],
             'registration_plate' => $this->faker->bothify('??###??'),
-            
         ];
     }
 }
