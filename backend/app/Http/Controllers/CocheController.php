@@ -23,7 +23,7 @@ class CocheController extends Controller
         $request->validate([
             'brand' => 'required|string',
             'model' => 'required|string',
-            'registration_plate' => 'required|string|unique:coches,registration_plate',
+            'registration_plate' => 'string|unique:coches,registration_plate',
             'id_client' => 'required|exists:clientes,id',
             // Agrega más validaciones según sea necesario
         ]);

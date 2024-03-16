@@ -23,7 +23,7 @@ class ClienteController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phone_number' => 'required|string',
-            'email' => 'required|email|unique:clientes,email',
+            'email' => 'email|unique:clientes,email',
         ]);
 
         // Crear un nuevo cliente con los datos proporcionados
