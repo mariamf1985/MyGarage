@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
 use App\Models\Cliente;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class ClienteController extends Controller
@@ -22,8 +23,7 @@ class ClienteController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phone_number' => 'required|string',
-            'email' => 'email|unique:clientes,email', // Ahora el email es opcional
-            // Añade más validaciones según sea necesario
+            'email' => 'required|email|unique:clientes,email',
         ]);
 
         // Crear un nuevo cliente con los datos proporcionados
@@ -32,12 +32,12 @@ class ClienteController extends Controller
             'surname' => $request->input('surname'), // Si no se proporciona, será nulo
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            // Agrega más campos si es necesario
         ]);
 
         // Retornar una respuesta JSON con el cliente recién creado
         return response()->json($cliente, 201);
     }
+
     public function show($id): JsonResponse
     {
         // Buscar el cliente por su ID en la base de datos
