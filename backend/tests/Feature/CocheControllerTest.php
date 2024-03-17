@@ -31,7 +31,7 @@ class CocheControllerTest extends TestCase
 
         // Verificar que la respuesta contiene la estructura esperada
         $response->assertJsonStructure([
-            '*' => ['id', 'brand', 'model', 'registration_plate', 'id_client', 'created_at', 'updated_at'],
+            '*' => ['id', 'brand', 'model', 'registration_plate', 'cliente_id', 'created_at', 'updated_at'],
         ]);
     }
 
@@ -47,7 +47,7 @@ class CocheControllerTest extends TestCase
             'brand' => $this->faker->word,
             'model' => $this->faker->word,
             'registration_plate' => $this->faker->unique()->bothify('??-####??'),
-            'id_client' => 1, // Ajustar según tus necesidades
+            'cliente_id' => 1, // Ajustar según tus necesidades
         ];
 
         // Realizar una solicitud HTTP para almacenar un nuevo coche
@@ -93,7 +93,7 @@ class CocheControllerTest extends TestCase
             'brand' => $this->faker->word,
             'model' => $this->faker->word,
             'registration_plate' => $this->faker->unique()->bothify('??-####??'),
-            'id_client' => 1, // Ajustar según tus necesidades
+            'cliente_id' => 1, // Ajustar según tus necesidades
         ];
 
         // Realizar una solicitud HTTP para actualizar el coche existente

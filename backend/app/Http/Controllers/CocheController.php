@@ -24,7 +24,7 @@ class CocheController extends Controller
             'brand' => 'required|string',
             'model' => 'required|string',
             'registration_plate' => 'string|unique:coches,registration_plate',
-            'id_client' => 'required|exists:clientes,id',
+            'cliente_id' => 'required|exists:clientes,id',
             // Agrega más validaciones según sea necesario
         ]);
 
@@ -66,7 +66,7 @@ class CocheController extends Controller
             'brand' => 'string',
             'model' => 'string',
             'registration_plate' => 'string|unique:coches,registration_plate,' . $coche->id,
-            'id_client' => 'exists:clientes,id',
+            'cliente_id' => 'exists:clientes,id',
             // Agrega más validaciones según sea necesario
         ]);
 

@@ -40,7 +40,7 @@ class CocheFactory extends Factory
                     'brand' => $car['make'],
                     'model' => $car['model'],
                     'registration_plate' => $this->faker->bothify('??###??'),
-                    'id_client'=> Cliente::inRandomOrder()->first()->id,
+                    'cliente_id'=> Cliente::inRandomOrder()->first()->id,
                 ];
             } else {
                 // Manejar el caso en el que la clave 'Makes' no está presente en la respuesta
@@ -49,7 +49,7 @@ class CocheFactory extends Factory
                     'brand' => $this->faker->word(),
                     'model' => $this->faker->word(),
                     'registration_plate' => $this->faker->bothify('??###??'),
-                    'id_client'=> Cliente::inRandomOrder()->first()->id,
+                    'cliente_id'=> Cliente::inRandomOrder()->first()->id,
                 ];
             }
         } catch (RequestException $e) {
@@ -59,7 +59,7 @@ class CocheFactory extends Factory
                 'brand' => $this->faker->word(),
                 'model' => $this->faker->word(),
                 'registration_plate' => $this->faker->bothify('??###??'),
-                'id_client'=> Cliente::inRandomOrder()->first()->id,
+                'cliente_id'=> Cliente::inRandomOrder()->first()->id,
             ];
         }
     }
