@@ -16,7 +16,7 @@ class Coche extends Model
      */
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'id_client');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
     /**

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('registration_plate');
-            $table->unsignedBigInteger('id_client');
+            $table->unsignedBigInteger('cliente_id');
             $table->timestamps();
 
-            $table->foreign('id_client')->references('id')->on('clientes');
+            $table->foreign('cliente_id')->references('id')->on('clientes');
         });
     }
 
