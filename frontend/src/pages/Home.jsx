@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../components/molecules/footer/Footer'
 
 
 const Home = () => {
@@ -6,6 +7,8 @@ const Home = () => {
     <>
     
     <h1>Esta es la home</h1>
+
+    <Footer />
     
     </>
   )
