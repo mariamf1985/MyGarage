@@ -1,52 +1,85 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../components/molecules/navbar/Navbar';
 import Footer from '../components/molecules/footer/Footer';
 
 const Citas = () => {
+    const [citas, setCitas] = useState([]);
+    const [error, setError] = useState(null);
+    const [carDetails, setCarDetails] = useState({});
+    const [serviceDetails, setServiceDetails] = useState({});
+
+    useEffect(() => {
+        const fetchCitas = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/citas');
+                setCitas(response.data);
+                setError(null);
+            } catch (error) {
+                console.error('Error al obtener las citas:', error);
+                setError('Error al cargar las citas. Por favor, inténtalo de nuevo más tarde.');
+            }
+        };
+
+        fetchCitas();
+    }, []);
+
+    useEffect(() => {
+        const fetchCarDetails = async (id_car) => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/api/coches/coche/${id_car}`);
+                setCarDetails((prevDetails) => ({ ...prevDetails, [id_car]: response.data }));
+            } catch (error) {
+                console.error('Error al obtener los detalles del coche:', error);
+            }
+        };
+
+        const fetchServiceDetails = async (id_service) => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/api/servicios/servicio/${id_service}`);
+                setServiceDetails((prevDetails) => ({ ...prevDetails, [id_service]: response.data }));
+            } catch (error) {
+                console.error('Error al obtener los detalles del servicio:', error);
+            }
+        };
+
+        citas.forEach((cita) => {
+            if (!carDetails[cita.id_car]) {
+                fetchCarDetails(cita.id_car);
+            }
+            if (!serviceDetails[cita.id_service]) {
+                fetchServiceDetails(cita.id_service);
+            }
+        });
+    }, [citas, carDetails, serviceDetails]);
+
     return (
         <>
             <Navbar />
 
-            
-<ol class="relative border-s border-gray-200 dark:border-gray-700">                  
-    <li class="mb-10 ms-6 text-left">            
-        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-            <svg class="w-2.5 h-2.5 text-black dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-            </svg>
-        </span>
-        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Application UI v2.0.0</h3>
-        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on January 13th, 2022</time>
-        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.</p>
-    </li>
-    <li class="mb-10 ms-6 text-left">
-        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-            <svg class="w-2.5 h-2.5 text-black dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-            </svg>
-        </span>
-        <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Figma v1.3.0</h3>
-        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on December 7th, 2021</time>
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
-    </li>
-    <li class="ms-6 text-left">
-        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-            <svg class="w-2.5 h-2.5 text-black dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-            </svg>
-        </span>
-        <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Library v1.2.2</h3>
-        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on December 2nd, 2021</time>
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Get started with dozens of web components and interactive elements built on top of Tailwind CSS.</p>
-    </li>
-</ol>
-
-
+            <div className="max-w-screen-xl mx-auto p-4">
+                <h2 className="text-2xl font-bold mb-4">Lista de Citas</h2>
+                {error && <p className="text-red-500">{error}</p>}
+                <ul>
+                    {citas && citas.map((cita) => {
+                        console.log(cita);
+                        const carName = carDetails[cita.id_car]?.model || 'Desconocido';
+                        const serviceName = serviceDetails[cita.id_service]?.name || 'Desconocido';
+                        return (
+                            <li key={cita.id} className="mb-6">
+                                <h3 className="text-lg font-semibold mb-1">{cita.date}</h3>
+                                <p className="text-sm text-gray-500 mb-1">Coche: {carName}</p>
+                                <p className="text-sm text-gray-500">Servicio: {serviceName}</p>
+                                <p className="text-sm text-gray-500">Descripción: {cita.description}</p>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
 
             <Footer />
         </>
-    )
+    );
+};
 
-}
-
-export default Citas
+export default Citas;
