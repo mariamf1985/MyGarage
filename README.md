@@ -22,7 +22,7 @@ The project is structured such that the frontend and backend parts are organized
 7. Once the installation is complete, verify that Node.js and npm have been installed correctly by opening a terminal or command prompt and running the commands node -v and npm -v. You should see the versions of Node.js and npm you have installed.
 9. Navigate to the "backend" directory.
 10. Run `composer install`.
-11. Create a database named "namaste" in phpMyAdmin.
+11. Create a database named "mygarage" in phpMyAdmin.
 12. Then copy the Configuration File with the following command `cp .env.example . env.` Configure your file . env with details of your environment, such as the connection to the database.
 13. Then you must generate the Application Key with the following command `php artisan key:generate`.
 14. Then run Migrations and Seeds with the following command `php artisan migrate --seed`. This will configure the database structure, create the necessary tables and populate them with the test data that was preset in the project.
